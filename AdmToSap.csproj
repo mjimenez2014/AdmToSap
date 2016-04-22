@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F3A798D2-7696-4BAD-A0C5-B49165126D93}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdmToSap</RootNamespace>
+    <AssemblyName>AdmToSap</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClasesDb\Precio.cs" />
+    <Compile Include="cotillonDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cotillonDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Export.cs" />
+    <Compile Include="Formularios\frmErrorEnvioToExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmErrorEnvioToExcel.Designer.cs">
+      <DependentUpon>frmErrorEnvioToExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmDocXFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmDocXFecha.Designer.cs">
+      <DependentUpon>frmDocXFecha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmPagosXFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmPagosXFecha.Designer.cs">
+      <DependentUpon>frmPagosXFecha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmProductosToExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmProductosToExcel.Designer.cs">
+      <DependentUpon>frmProductosToExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmStockToExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmStockToExcel.Designer.cs">
+      <DependentUpon>frmStockToExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmExportExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmExportExcel.Designer.cs">
+      <DependentUpon>frmExportExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmPreciosToExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmPreciosToExcel.Designer.cs">
+      <DependentUpon>frmPreciosToExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmSucursales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmSucursales.Designer.cs">
+      <DependentUpon>frmSucursales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmProductosDgw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmProductosDgw.Designer.cs">
+      <DependentUpon>frmProductosDgw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmGetProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmGetProductos.Designer.cs">
+      <DependentUpon>frmGetProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmReportEnvios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmReportEnvios.Designer.cs">
+      <DependentUpon>frmReportEnvios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario.cs" />
+    <Compile Include="ClasesDb\BancoDb.cs" />
+    <Compile Include="ClasesDb\InventariosDb.cs" />
+    <Compile Include="Connect.cs" />
+    <Compile Include="ClasesDb\ConnectDb.cs" />
+    <Compile Include="ConvertAdmSap.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="ClasesDb\DocumentDb.cs" />
+    <Compile Include="Empresa.cs" />
+    <Compile Include="ClasesDb\EmpresaDb.cs" />
+    <Compile Include="Formularios\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmBaseDato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmBaseDato.Designer.cs">
+      <DependentUpon>frmBaseDato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmBodegas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmBodegas.Designer.cs">
+      <DependentUpon>frmBodegas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmDocumento.Designer.cs">
+      <DependentUpon>frmDocumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmEmpresa.Designer.cs">
+      <DependentUpon>frmEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmLog.Designer.cs">
+      <DependentUpon>frmLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmRespuestas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmRespuestas.Designer.cs">
+      <DependentUpon>frmRespuestas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmSucursal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmSucursal.Designer.cs">
+      <DependentUpon>frmSucursal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmBancos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmBancos.Designer.cs">
+      <DependentUpon>frmBancos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmTemporizador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmTemporizador.Designer.cs">
+      <DependentUpon>frmTemporizador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClasesDb\LocalDataBase.cs" />
+    <Compile Include="JournalEntry.cs" />
+    <Compile Include="ClasesDb\JournalEntryDb.cs" />
+    <Compile Include="ListaPrecio.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Partner.cs" />
+    <Compile Include="ClasesDb\PartnerDb.cs" />
+    <Compile Include="Payment.cs" />
+    <Compile Include="ClasesDb\PaymentDb.cs" />
+    <Compile Include="ClasesDb\PreciosDb.cs" />
+    <Compile Include="Procesos.cs" />
+    <Compile Include="Producto.cs" />
+    <Compile Include="ClasesDb\ProductosDb.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Respuesta.cs" />
+    <Compile Include="ClasesDb\RespuestasDb.cs" />
+    <Compile Include="Temporizadores.cs" />
+    <Compile Include="_C__admtosap_DataB_sqliteDataSet.cs">
+      <DependentUpon>_C__admtosap_DataB_sqliteDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="_C__admtosap_DataB_sqliteDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_C__admtosap_DataB_sqliteDataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Formularios\frmErrorEnvioToExcel.resx">
+      <DependentUpon>frmErrorEnvioToExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmDocXFecha.resx">
+      <DependentUpon>frmDocXFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmPagosXFecha.resx">
+      <DependentUpon>frmPagosXFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmProductosToExcel.resx">
+      <DependentUpon>frmProductosToExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmStockToExcel.resx">
+      <DependentUpon>frmStockToExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmBaseDato.resx">
+      <DependentUpon>frmBaseDato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmBodegas.resx">
+      <DependentUpon>frmBodegas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmDocumento.resx">
+      <DependentUpon>frmDocumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmEmpresa.resx">
+      <DependentUpon>frmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmExportExcel.resx">
+      <DependentUpon>frmExportExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmLog.resx">
+      <DependentUpon>frmLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmPreciosToExcel.resx">
+      <DependentUpon>frmPreciosToExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmRespuestas.resx">
+      <DependentUpon>frmRespuestas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmSucursal.resx">
+      <DependentUpon>frmSucursal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmBancos.resx">
+      <DependentUpon>frmBancos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmTemporizador.resx">
+      <DependentUpon>frmTemporizador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmSucursales.resx">
+      <DependentUpon>frmSucursales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmProductosDgw.resx">
+      <DependentUpon>frmProductosDgw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmGetProductos.resx">
+      <DependentUpon>frmGetProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmReportEnvios.resx">
+      <DependentUpon>frmReportEnvios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cotillonDataSet.xsc">
+      <DependentUpon>cotillonDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="cotillonDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>cotillonDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cotillonDataSet.xss">
+      <DependentUpon>cotillonDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="_C__admtosap_DataB_sqliteDataSet.xsc">
+      <DependentUpon>_C__admtosap_DataB_sqliteDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_C__admtosap_DataB_sqliteDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_C__admtosap_DataB_sqliteDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_C__admtosap_DataB_sqliteDataSet.xss">
+      <DependentUpon>_C__admtosap_DataB_sqliteDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,210 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.Odbc;
+using System.Data.SQLite;
+
+namespace AdmToSap
+{
+    class PartnerDb
+    {
+        String strConn = @"Data Source=C:/admtosap/DataB.sqlite;Pooling=true;FailIfMissing=false;Version=3";
+        ConnectDb con = new ConnectDb();
+        ConvertAdmSap convAdmToSap = new ConvertAdmSap();
+        public List<Partner> getPartners()
+        {
+            OdbcConnection conexion = con.getConnect();
+            List<Partner> partners = new List<Partner>();
+            OdbcCommand select = new OdbcCommand();
+            select.Connection = conexion;
+            select.CommandText = "select clientes.*, paises.pais as country, ciudades.ciudad as city, comunas.comuna as county "
+            + "from clientes "
+            + "inner join paises on clientes.cod_pais=paises.cod_pais "
+            + "inner join ciudades on clientes.cod_pais=ciudades.cod_pais "
+            + "and clientes.cod_ciudad=ciudades.cod_ciudad "
+            + "inner join comunas on clientes.cod_pais=comunas.cod_pais "
+            + "and clientes.cod_ciudad=comunas.cod_ciudad "
+            + "and clientes.cod_comuna=comunas.cod_comuna "
+            + "where isnull(clientes.estado) or clientes.estado in (1,2) "
+            + "order by clientes.cod_empresa, clientes.rut";
+
+            OdbcDataReader reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                Partner partner = new Partner();
+                String codempresa = reader.GetString(reader.GetOrdinal("COD_EMPRESA"));
+               
+                                    SQLiteConnection myConn = new SQLiteConnection(strConn);
+                                    myConn.Open();
+                                    string sql = "SELECT * FROM empresas";
+                                    SQLiteCommand command = new SQLiteCommand(sql, myConn);
+                                    SQLiteDataReader reader2 = command.ExecuteReader();
+                                    while (reader2.Read())
+                                    {
+                                        partner.SalesPersonCode = convAdmToSap.getSalesPersonCode( reader2.GetInt32(reader2.GetOrdinal("cod_sucursal"))).ToString();
+                                        partner.SlpCode = convAdmToSap.getSalesPersonCode( reader2.GetInt32(reader2.GetOrdinal("cod_sucursal"))).ToString();
+                                    }
+
+                                    myConn.Close();
+
+                partner.CardCode = "";
+                partner.CardName = reader.GetString(reader.GetOrdinal("R_SOCIAL"));
+                partner.LicTradNum = reader.GetString(reader.GetOrdinal("RUT"));
+                partner.Notes = reader.GetString(reader.GetOrdinal("GIRO"));
+                partner.GroupNum = "";
+                partner.Street = reader.GetString(reader.GetOrdinal("DIRECCION"));
+                partner.Block = "";
+                partner.City = reader.GetString(reader.GetOrdinal("city"));
+                partner.County = reader.GetString(reader.GetOrdinal("county"));
+                partner.Country = reader.GetString(reader.GetOrdinal("country"));
+                partner.udf = "";
+                partner.codEmpresa = codempresa;
+
+                partners.Add(partner);
+
+                Console.WriteLine("{0} {1} {2}",
+                reader.GetString(reader.GetOrdinal("R_SOCIAL")) + " | ",
+                reader.GetString(reader.GetOrdinal("RUT")) + " | ",
+                reader.GetString(reader.GetOrdinal("GIRO")) + " | ",
+                reader.GetString(reader.GetOrdinal("DIRECCION")) + " | ",
+                reader.GetString(reader.GetOrdinal("country")) + " | ",
+                reader.GetString(reader.GetOrdinal("city")) + " | ",
+                reader.GetString(reader.GetOrdinal("county"))
+
+                );
+            }
+
+            conexion.Close();
+
+            return partners;
+
+
+        }
+
+        public Partner getPartner(String rut)
+        {
+            Partner cliente = new Partner();
+            OdbcConnection conexion = con.getConnect();
+            OdbcCommand select = new OdbcCommand();
+            DocumentDb docdb = new DocumentDb();
+            select.Connection = conexion;
+            select.CommandText = "select clientes.*, paises.pais as country, ciudades.ciudad as city, comunas.comuna as county "
+            + "from clientes "
+            + "inner join paises on clientes.cod_pais=paises.cod_pais "
+            + "inner join ciudades on clientes.cod_pais=ciudades.cod_pais "
+            + "and clientes.cod_ciudad=ciudades.cod_ciudad "
+            + "inner join comunas on clientes.cod_pais=comunas.cod_pais "
+            + "and clientes.cod_ciudad=comunas.cod_ciudad "
+            + "and clientes.cod_comuna=comunas.cod_comuna "
+            + "where RUT =  '"+  rut + "' "
+            + "order by clientes.cod_empresa, clientes.rut";
+
+            OdbcDataReader reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                String codempresa = reader.GetString(reader.GetOrdinal("COD_EMPRESA"));
+
+                SQLiteConnection myConn = new SQLiteConnection(strConn);
+                myConn.Open();
+                string sql = "SELECT * FROM empresas";
+                SQLiteCommand command = new SQLiteCommand(sql, myConn);
+                SQLiteDataReader reader2 = command.ExecuteReader();
+                while (reader2.Read())
+                {
+                    cliente.SalesPersonCode = convAdmToSap.getSalesPersonCode(reader2.GetInt32(reader2.GetOrdinal("cod_sucursal"))).ToString();
+                    cliente.SlpCode = convAdmToSap.getSalesPersonCode( reader2.GetInt32(reader2.GetOrdinal("cod_sucursal"))).ToString();
+                }
+
+                myConn.Close();
+                cliente.CardCode = "";
+                cliente.CardName = reader.GetString(reader.GetOrdinal("R_SOCIAL"));
+                cliente.LicTradNum = reader.GetString(reader.GetOrdinal("RUT"));
+                cliente.Notes = reader.GetString(reader.GetOrdinal("GIRO"));
+                cliente.GroupNum = "";
+                cliente.Street = reader.GetString(reader.GetOrdinal("DIRECCION"));
+                cliente.Block = "";
+                cliente.City = reader.GetString(reader.GetOrdinal("city"));
+                cliente.County = reader.GetString(reader.GetOrdinal("county"));
+                cliente.Country = reader.GetString(reader.GetOrdinal("country"));
+                cliente.udf = "";
+                cliente.codEmpresa = codempresa;
+            }
+            return cliente;
+
+        }
+
+        public void updateInAdm(String empresa, String rut)
+        {
+            OdbcConnection conexion = con.getConnect();
+            OdbcCommand update = new OdbcCommand();
+            update.Connection = conexion;
+
+            update.CommandText = "update clientes "
+            + "set estado = 0 "
+            + "where cod_empresa = " + empresa + " and rut='" + rut + "' and estado in (1,2);";
+
+
+            OdbcDataReader up = update.ExecuteReader();
+
+        }
+
+        public String getRutAdm(String rut)
+        {
+            String rutAdm = String.Empty;
+
+            OdbcConnection conexion = con.getConnect();
+            OdbcCommand select = new OdbcCommand();
+            DocumentDb docdb = new DocumentDb();
+            select.Connection = conexion;
+            select.CommandText = "select clientes.*, paises.pais as country, ciudades.ciudad as city, comunas.comuna as county "
+            + "from clientes "
+            + "inner join paises on clientes.cod_pais=paises.cod_pais "
+            + "inner join ciudades on clientes.cod_pais=ciudades.cod_pais "
+            + "and clientes.cod_ciudad=ciudades.cod_ciudad "
+            + "inner join comunas on clientes.cod_pais=comunas.cod_pais "
+            + "and clientes.cod_ciudad=comunas.cod_ciudad "
+            + "and clientes.cod_comuna=comunas.cod_comuna "
+            + "where RUT =  '"+  rut + "' "
+            + "order by clientes.cod_empresa, clientes.rut";
+
+            OdbcDataReader reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                rutAdm = reader.GetString(reader.GetOrdinal("RUT"));
+            }
+
+
+            return rutAdm;
+        }
+
+        public bool getRutSqlite(String rut)
+        {
+            bool rutSqlite = false;
+            String ruts = String.Empty;
+            SQLiteConnection myConn = new SQLiteConnection(strConn);
+            myConn.Open();
+            string sql = "SELECT * FROM respuestas where mensaje = 'CB-" + rut+ "' ";
+            SQLiteCommand command = new SQLiteCommand(sql, myConn);
+            SQLiteDataReader reader2 = command.ExecuteReader();
+            while (reader2.Read())
+            {
+               ruts =   reader2.GetString(reader2.GetOrdinal("mensaje"));
+            }
+
+            if (ruts == "")
+            {
+                rutSqlite = false;
+            }
+            else
+            {
+                rutSqlite = true;
+            }
+
+            myConn.Close();
+            return rutSqlite;
+        }
+
+
+    }
+}
