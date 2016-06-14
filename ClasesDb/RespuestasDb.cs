@@ -118,6 +118,7 @@ namespace AdmToSap
 
         public String extraeJsonPrecios(string json)
         {
+           
             string mensaje = string.Empty;
 
             int start = json.IndexOf("<JSONResponse>[")+15;
@@ -155,7 +156,7 @@ namespace AdmToSap
             }
             catch (Exception e)
             {
-                Console.WriteLine("Eror de conección" + e);
+               // Console.WriteLine("ErRor de conección" + e);
                 mensaje.errorMsg = "Error de conección";
             }
             return mensaje;

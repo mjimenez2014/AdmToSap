@@ -521,6 +521,31 @@ namespace AdmToSap
             return plu1;
         }
 
+        public string exists(string plu)
+        {
+            string respuesta = "False";
+            try
+            {
+                OdbcConnection conexion = con.getConnect();
+                OdbcCommand select = new OdbcCommand();
+                select.Connection = conexion;
+                select.CommandText = "SELECT * FROM productos WHERE COD_ART = " + plu +" ;";
+                OdbcDataReader reader = select.ExecuteReader();
+                if (reader.RecordsAffected != 0)
+                {
+                    respuesta = "True";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error" + ex.Message);
+            }
+            return respuesta;
+
+
+
+        }
+
 
     }
 }

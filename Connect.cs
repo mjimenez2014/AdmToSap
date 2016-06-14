@@ -15,43 +15,37 @@ namespace AdmToSap
         public string pass { get; set; }
         public string ip_sap { get; set; }
 
-        public  string HttpPOST(string url, string querystring) { 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.Headers.Add("encoding: utf-8");
-            // or whatever - application/json, etc, etc 
-            
-            Stream newStream = request.GetRequestStream();
+        public  string HttpPOST(string url, string querystring) {
 
-            StreamWriter requestWriter = new StreamWriter(newStream);
-            try { 
-                requestWriter.Write(querystring); 
-            } catch 
-            { 
-                throw; 
-            } 
-            finally
-            {
-                Console.WriteLine(requestWriter);
-                requestWriter.Close(); 
-                requestWriter = null; 
-            }
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.Headers.Add("encoding: utf-8");
+                // or whatever - application/json, etc, etc 
 
-            try
-            {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                Stream newStream = request.GetRequestStream();
+
+                StreamWriter requestWriter = new StreamWriter(newStream);
+                requestWriter.Write(querystring);
+                //Console.WriteLine(requestWriter);
+                requestWriter.Close();
+                requestWriter = null;
+
+                try
                 {
-                    return sr.ReadToEnd();
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                    {
+                        return sr.ReadToEnd();
+                    }
                 }
-            }
-            catch (WebException ex)
-            {
-                return ex.ToString();
-                
-            }
-        }
+                catch (WebException ex)
+                {
+                    return ex.ToString();
+
+                }
+
+        }// fin HttpPOST
 
 
     }

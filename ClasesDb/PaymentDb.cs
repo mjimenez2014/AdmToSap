@@ -25,12 +25,13 @@ namespace AdmToSap
                 + " where COD_EMPRESA = " + payment.codEmpresa
                 + " and COD_SUCURSAL = " + payment.codSucursalAbono
                 + " and CAJA = " + payment.caja
+                + " and RUT_CLTE = '" + payment.CardCode + "'"
                 + " and  NRO_ABONO = " + payment.nroAbono + ";";  // numero de abono
 
             OdbcDataReader reader = select.ExecuteReader();
             while (reader.Read())
             {
-                suma += reader.GetDecimal(reader.GetOrdinal("MONTO")); ; 
+                suma += reader.GetDecimal(reader.GetOrdinal("MONTO")); 
             }
             conexion.Close();
 
@@ -93,7 +94,7 @@ namespace AdmToSap
 
 
 
-                payment.checks = getCheques(empresa.cod_empresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono);
+                payment.checks = getCheques(empresa.cod_empresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono,payment.CardCode);
 
                 payment.creditcard = getTarjetas(empresa.cod_empresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono);
 
@@ -182,9 +183,7 @@ namespace AdmToSap
 
                 payment.documentsap = getDocSap(payment.codEmpresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono, reader.GetByte(reader.GetOrdinal("TIPO_CARGO")), payment.folioDte);
 
-
-
-                payment.checks = getCheques(empresa.cod_empresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono);
+                payment.checks = getCheques(empresa.cod_empresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono, payment.CardCode);
 
                 payment.creditcard = getTarjetas(empresa.cod_empresa, payment.codSucursalAbono, payment.caja, payment.tipoAbono, payment.nroAbono);
 
@@ -203,11 +202,15 @@ namespace AdmToSap
                 }
 
                 payments.Add(payment);
-
-                Console.WriteLine("{0} {1}", reader.GetString(reader.GetOrdinal("nro_comprobante")) + " - ",
-                                             reader.GetString(reader.GetOrdinal("MONTO"))
-
+  
+                Console.WriteLine("====================================================================================");
+                Console.WriteLine("{0} {1} {2} {3} {4}", payment.folioDte + " - ",
+                                                         payment.nroAbono + " - ",
+                                                         payment.tipoAbono + " - ",
+                                                         payment.tipoCargoAdm + " - ",
+                                                         payment.CashSum
                                              );
+
             }
 
 
@@ -216,7 +219,7 @@ namespace AdmToSap
             return payments;
         }
 
-        public List<Documentsap> getDocSap(byte empreas, Int32 sucAbono, byte caja, int tipo, int numero, int tipodte, decimal foliodte)
+        public List<Documentsap> getDocSap(byte empreas, int sucAbono, byte caja, int tipo, int numero, int tipodte, decimal foliodte)
         {
             OdbcConnection conexion = con.getConnect();
             List<Documentsap> docsap = new List<Documentsap>();
@@ -268,7 +271,7 @@ namespace AdmToSap
 
         }
 
-        public List<Checks> getCheques(int codEmpresa, int codSucursal, int caja, int tipo, int numero)
+        public List<Checks> getCheques(int codEmpresa, int codSucursal, int caja, int tipo, int numero, string carCode)
         {
             OdbcConnection conexion = con.getConnect();
             List<Checks> cheques = new List<Checks>();
@@ -278,6 +281,7 @@ namespace AdmToSap
                 + " where COD_EMPRESA = " + codEmpresa
                 + " and CAJA = " + caja
                 + " and fecha_cierre IS NULL "
+                + " and RUT_CLTE = '" +carCode+ "'" 
                 + " and TIPO_PAGO in (2,3)"   
                 + " and TIPO_DOCTO = " + tipo  // tipo de abono
                 + " and NRO_DOCTO = " + numero + ";";  // codigo de abono
