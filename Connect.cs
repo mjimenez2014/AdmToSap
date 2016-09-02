@@ -21,8 +21,9 @@ namespace AdmToSap
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 request.Headers.Add("encoding: utf-8");
-                // or whatever - application/json, etc, etc 
-
+            // or whatever - application/json, etc, etc 
+            try
+            {
                 Stream newStream = request.GetRequestStream();
 
                 StreamWriter requestWriter = new StreamWriter(newStream);
@@ -30,8 +31,15 @@ namespace AdmToSap
                 //Console.WriteLine(requestWriter);
                 requestWriter.Close();
                 requestWriter = null;
+            }
+            catch (WebException e)
+            {
+                return e.ToString();
 
-                try
+            }
+
+
+            try
                 {
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     using (StreamReader sr = new StreamReader(response.GetResponseStream()))

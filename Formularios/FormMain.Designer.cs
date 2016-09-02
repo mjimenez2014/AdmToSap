@@ -338,7 +338,7 @@ namespace AdmToSap
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(181, 16);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Versión: _20160614_0200";
+            this.label2.Text = "Versión: _20160902_1620";
             // 
             // button3
             // 

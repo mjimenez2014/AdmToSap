@@ -176,7 +176,7 @@ namespace AdmToSap
                         +"dum14='0', "
                         + "simbolo_stock='" + pro.SUventa + "', "
                         +"propiedad=1, "
-                        +"tipo=5, "
+                        +"tipo=1, "
                         +"tipo_promocion=0, "
                         +"ticket_atencion=0, "
                         +"cod_encuesta=0, "

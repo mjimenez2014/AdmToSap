@@ -110,9 +110,8 @@ namespace AdmToSap
             int start = json.IndexOf("{\"rowCount\"");
             int end = json.IndexOf("</JSONResponse>");
             int largo = end - start;
-
-            mensaje = json.Substring(start, largo);
-
+            if(largo > 0)
+                mensaje = json.Substring(start, largo);         
             return mensaje;
         }
 

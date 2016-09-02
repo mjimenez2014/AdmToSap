@@ -1306,7 +1306,7 @@ namespace AdmToSap
             var date = DateTime.Now;
             this.getProductos(String.Format("{0:yyyyMMdd}", date), "100", frmain);
             this.getInventarios(String.Format("{0:yyyyMMdd}", date), "100", frmain);
-            this.getPrecios(String.Format("{0:yyyyMMdd}", date), "100", frmain);
+            //this.getPrecios(String.Format("{0:yyyyMMdd}", date), "100", frmain);
 
 
         }
