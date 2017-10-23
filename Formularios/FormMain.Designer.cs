@@ -336,9 +336,9 @@ namespace AdmToSap
             this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(12, 275);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(181, 16);
+            this.label2.Size = new System.Drawing.Size(173, 16);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Versión: _20160902_1620";
+            this.label2.Text = "Versión: 20161029_1800";
             // 
             // button3
             // 

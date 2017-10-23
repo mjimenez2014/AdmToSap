@@ -64,6 +64,7 @@ C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\bin\Release\Cry
 C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\bin\Release\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\bin\Release\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\bin\Release\stdole.dll
+C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\obj\x86\Release\AdmToSap.csprojResolveAssemblyReference.cache
 C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\obj\x86\Release\AdmToSap.csproj.ResolveComReference.cache
 C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\obj\x86\Release\AdmToSap.frmErrorEnvioExcel.resources
 C:\Users\Mauricio\Documents\Visual Studio 2015\Projects\AdmToSap\obj\x86\Release\AdmToSap.frmDocXFecha.resources

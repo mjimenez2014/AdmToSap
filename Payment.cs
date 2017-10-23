@@ -45,8 +45,6 @@ namespace AdmToSap
         public string vendedor { get; set; } 
 
 
-
-
         [DataMember]
         public UdfPayment udf = new UdfPayment(); // lista de Udfs
 
